@@ -3,6 +3,10 @@
 # To compile on MinGW: add "-lws2_32" to LDFLAGS or define WINDOWS in your env
 # To compile with PKCS11: add "-lpkcs11-helper" to LDFLAGS
 
+CC=riscv64-unknown-linux-gnu-gcc 
+AR=riscv64-unknown-linux-gnu-ar 
+LD=riscv64-unknown-linux-gnu-ld
+
 CFLAGS	+= -I../include -D_FILE_OFFSET_BITS=64 -Wall -W -Wdeclaration-after-statement
 OFLAGS	= -O2
 LDFLAGS	+= -L../library -lmbedtls $(SYS_LDFLAGS)

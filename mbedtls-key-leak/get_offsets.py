@@ -3,12 +3,12 @@
 
 from pwn import *
 
-#LIB = "./mbedtls/library/libmbedtls.so"
-LIB = "./libmbedtls.so.8"
+LIB = "./mbedtls/library/libmbedtls.so.8"
+# LIB = "./libmbedtls.so.8"
 
 def get_offsets(libpath):
     context.log_level = 'error'
-    context.arch = 'riscv'
+    context.arch = 'riscv64'
     e = ELF(LIB)
     ctr_drbg_init_offset = e.functions['ctr_drbg_init'].address
     print(f"[+] CTR_DRBG_INIT_OFFSET @ 0x{ctr_drbg_init_offset:x}")

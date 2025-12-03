@@ -1,4 +1,8 @@
 
+CC=riscv64-unknown-linux-gnu-gcc 
+AR=riscv64-unknown-linux-gnu-ar 
+LD=riscv64-unknown-linux-gnu-ld
+
 DESTDIR=/usr/local
 PREFIX=mbedtls_
 OLDPREFIX=polarssl_

@@ -4,6 +4,11 @@
 # To compile on MinGW: add "-lws2_32" to LDFLAGS or define WINDOWS in your
 # environment
 #
+CC=riscv64-unknown-linux-gnu-gcc 
+AR=riscv64-unknown-linux-gnu-ar 
+LD=riscv64-unknown-linux-gnu-ld
+export PATH := /home/yx/FIMITEE/FIMITEE/riscv64/bin:$(PATH)
+
 SHARED=true
 CFLAGS	+= -I../include -D_FILE_OFFSET_BITS=64 -Wall -W -Wdeclaration-after-statement
 OFLAGS	= -O2
