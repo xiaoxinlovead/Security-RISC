@@ -6,6 +6,7 @@ AR=riscv64-unknown-linux-gnu-ar
 LD=riscv64-unknown-linux-gnu-ld
 
 export PATH := /home/yx/FIMITEE/FIMITEE/riscv64/bin:$(PATH)
+
 all: encrypt decrypt exploit exploit2 exploit-fr-parallel exploit-fr-sequential
 
 encrypt: encrypt.c
