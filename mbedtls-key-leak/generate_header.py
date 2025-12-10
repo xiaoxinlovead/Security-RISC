@@ -4,9 +4,9 @@ import subprocess
 
 from get_offsets import get_offsets
 
-LIBPATH = "./libmbedtls.so.8"
+# LIBPATH = "./libmbedtls.so.8"
 OFFSET_HEADERFILE = "./attack_offsets.h"
-
+LIBPATH = "./mbedtls/library/libmbedtls.a"
 def execute_cmd(s):
     return subprocess.check_output(s, shell=True, timeout=10).decode()
 

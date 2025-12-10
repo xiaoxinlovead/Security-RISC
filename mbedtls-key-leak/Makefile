@@ -10,25 +10,25 @@ export PATH := /home/yx/FIMITEE/FIMITEE/riscv64/bin:$(PATH)
 all: encrypt decrypt exploit exploit2 exploit-fr-parallel exploit-fr-sequential
 
 encrypt: encrypt.c
-	$(CC) -Lmbedtls/library -Imbedtls/include encrypt.c -ggdb3 -Wall -o encrypt -lmbedtls
+	$(CC) -static -Lmbedtls/library -Imbedtls/include encrypt.c -ggdb3 -Wall -o encrypt -lmbedtls
 
 decrypt: decrypt.c
-	$(CC) -Lmbedtls/library -Imbedtls/include decrypt.c -ggdb3 -Wall -o decrypt -lmbedtls
+	$(CC) -static  -Lmbedtls/library -Imbedtls/include decrypt.c -ggdb3 -Wall -o decrypt -lmbedtls
 
 decrypt-simulator: decrypt-simulator.c
-	$(CC) -Lbp-simulator/library -Ibp-simulator/include decrypt-simulator.c -ggdb3 -Wall -o decrypt-simulator -lmbedtls
+	$(CC) -static  -Lbp-simulator/library -Ibp-simulator/include decrypt-simulator.c -ggdb3 -Wall -o decrypt-simulator -lmbedtls
 
 exploit: exploit.c simulator.c
-	$(CC) -Lmbedtls/library -Imbedtls/include simulator.c exploit.c -ggdb3 -Wall -Os -o exploit -lmbedtls
+	$(CC) -static  -Lmbedtls/library -Imbedtls/include simulator.c exploit.c -ggdb3 -Wall -Os -o exploit -lmbedtls
 
 exploit2: exploit2.c
-	$(CC) -Lmbedtls/library -Imbedtls/include exploit2.c -ggdb3 -Wall -Os -o exploit2 -lmbedtls
+	$(CC) -static  -Lmbedtls/library -Imbedtls/include exploit2.c -ggdb3 -Wall -Os -o exploit2 -lmbedtls
 
 exploit-fr-parallel: exploit_flush_reload_parallel.c
-	$(CC) -Lmbedtls/library -Imbedtls/include exploit_flush_reload_parallel.c -ggdb3 -Wall -Os -o exploit-flush-reload-parallel -lmbedtls
+	$(CC) -static  -Lmbedtls/library -Imbedtls/include exploit_flush_reload_parallel.c -ggdb3 -Wall -Os -o exploit-flush-reload-parallel -lmbedtls
 
 exploit-fr-sequential: exploit_flush_reload_sequential.c
-	$(CC) -Lmbedtls/library -Imbedtls/include exploit_flush_reload_sequential.c -ggdb3 -Wall -Os -o exploit-flush-reload-sequential -lmbedtls
+	$(CC) -static  -Lmbedtls/library -Imbedtls/include exploit_flush_reload_sequential.c -ggdb3 -Wall -Os -o exploit-flush-reload-sequential -lmbedtls
 
 run_encrypt: encrypt
 	LD_LIBRARY_PATH=./mbedtls/library taskset -c ${CPU_NO_VICTIM} ./encrypt

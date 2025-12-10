@@ -3,9 +3,9 @@
 
 from pwn import *
 
-LIB = "./mbedtls/library/libmbedtls.so.8"
+# LIB = "./mbedtls/library/libmbedtls.so.8"
 # LIB = "./libmbedtls.so.8"
-
+LIB = "./mbedtls/library/libmbedtls.a"
 def get_offsets(libpath):
     context.log_level = 'error'
     context.arch = 'riscv64'
