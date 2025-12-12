@@ -30,6 +30,13 @@ lab-machine> sudo python3 ./evaluate-attack.py get-leakage
 local> scp lab-machine:~/risc-attack-eval risc-attack-eval/
 local> python3 ./evaluate-attack post-process <THRESHOLD>
 ```
+# Works on Gem5
+python3 build.py
+make encrypt decrypt
+cp mbedtls-key-leak to gem5
+run encrypt and decrypt by pass.     key leak in the key_leak.log
+or you can run run_decrypt_100.sh after run encrypt
+
 
 ## Choosing the right threshold
 The last command from the previous section can be given an threshold, which is the number of cycles that distinguish 0-bits from 1-bits. 
